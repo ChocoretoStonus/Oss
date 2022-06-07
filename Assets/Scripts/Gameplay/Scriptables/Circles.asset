@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b99b42a358e20944aa7a9d3d18c6529, type: 3}
+  m_Name: Circles
+  m_EditorClassIdentifier: 
+  captura:
+  - 1.576236
+  - 0.6887301
+  - 0.7438804
+  - 0.5967933
+  - 0.38226393
+  - 0.33224887
+  - 0.77285796
+  - 0.6728462
+  - 0.6881859
+  - 0.71705246
+  - 0.70578676
+  - 0.70534647
+  - 0.7479322
+  - 0.20092574
+  - 0.16519369
+  - 0.17482881
+  - 1.5722693
+  - 1.570538
+  - 0.30471626
+  - 0.3373144
+  - 0.27682352
+  - 0.32077208
+  - 0.2698964
+  - 0.2600039
+  - 4.986201
+  - 0.747052
+  - 0.24138653
+  - 0.3059678
+  - 0.84889084
+  - 0.28390554
+  - 0.30649883
+  - 0.58573323
+  - 0.3302224
+  - 0.32545668
+  - 0.36131337
+  aument: 2.6733057
+  reset: 0.004956
