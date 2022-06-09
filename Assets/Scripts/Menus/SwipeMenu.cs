@@ -16,6 +16,7 @@ public class SwipeMenu : MonoBehaviour
     [SerializeField] bool Change = true, NameScroll = true, ArtistScroll=true;
     [SerializeField] TextMeshProUGUI Name, Artist,MaxAcc,Difficulty;
     [SerializeField] GameObject Exit_Prefab, To_Black;
+    private float Acc;
     void Awake()
     {
         nameLimit = -106;
@@ -211,13 +212,50 @@ public class SwipeMenu : MonoBehaviour
                 //Vigin
                 Name.text = "Virgin Sindrome";
                 Artist.text = "osu! virgin gang";
-                MaxAcc.text= "Max Acc: " + PlayerPrefs.GetFloat("Accuracy")+"%";
+                fullAcc();
                 Difficulty.text = "Difficulty: 4.5 stars";
                 AudioSystem.clip = Music[8];
                 AudioSystem.Play();
             }
         }
     }
+
+
+
+    void fullAcc()
+    {
+        Acc = PlayerPrefs.GetFloat("HighAcc");
+        //aqui obtengo mi accuracy en un valor redondeado para compararla
+        //con el accuracy obtenido del metodo "Accuracy"
+        float Int = Mathf.Round(Acc);
+
+        float mult = Mathf.Pow(10.0f, 2);
+        float OneDecimal = Mathf.Round(Acc * mult) / mult;
+
+
+        if (Acc > 100)
+        {
+            MaxAcc.text = Acc + ".00%";
+        }
+        else if (Acc <= 0)
+        {
+            Acc = 0;
+            MaxAcc.text = Acc + ".00%";
+        }
+        else if (Acc == Int)
+        {
+            MaxAcc.text = Acc + ".00%";
+        }
+        else if (Acc == OneDecimal)
+        {
+            MaxAcc.text = Acc + "0%";
+        }
+        else
+        {
+            MaxAcc.text = Acc + "%";
+        }
+    }
+
 
 
 
