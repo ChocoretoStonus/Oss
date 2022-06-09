@@ -235,24 +235,24 @@ public class SwipeMenu : MonoBehaviour
 
         if (Acc > 100)
         {
-            MaxAcc.text = Acc + ".00%";
+            MaxAcc.text = "Max Acc: " + Acc + ".00%";
         }
         else if (Acc <= 0)
         {
             Acc = 0;
-            MaxAcc.text = Acc + ".00%";
+            MaxAcc.text = "Max Acc: " + Acc + ".00%";
         }
         else if (Acc == Int)
         {
-            MaxAcc.text = Acc + ".00%";
+            MaxAcc.text = "Max Acc: " + Acc + ".00%";
         }
         else if (Acc == OneDecimal)
         {
-            MaxAcc.text = Acc + "0%";
+            MaxAcc.text = "Max Acc: " + Acc + "0%";
         }
         else
         {
-            MaxAcc.text = Acc + "%";
+            MaxAcc.text = "Max Acc: " + Acc + "%";
         }
     }
 
