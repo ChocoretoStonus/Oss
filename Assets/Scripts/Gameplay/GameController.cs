@@ -44,9 +44,10 @@ public class GameController : MonoBehaviour
     void Start()
     {
         int ReStartPref = 0;
+        float ReStartPrefFloat = 0;
 
         PlayerPrefs.SetInt("GameScore", ReStartPref);
-        PlayerPrefs.SetFloat("Accuracy", ReStartPref);
+        PlayerPrefs.SetFloat("Accuracy", ReStartPrefFloat);
         PlayerPrefs.SetInt("300", ReStartPref);
         PlayerPrefs.SetInt("100", ReStartPref);
         PlayerPrefs.SetInt("50", ReStartPref);
@@ -70,8 +71,8 @@ public class GameController : MonoBehaviour
         //}
         if (TimeMusic.fillAmount >= 0.993) {
             permiso = true;
-            PlayerPrefs.SetInt("GameScore" , ScorePlayer);
-            PlayerPrefs.SetFloat("Accuracy" , Accuracy);
+            PlayerPrefs.SetInt("GameScore", ScorePlayer);
+            PlayerPrefs.SetFloat("Accuracy", Accuracy);
             PlayerPrefs.SetInt("300", Cont_300);
             PlayerPrefs.SetInt("100", Cont_100);
             PlayerPrefs.SetInt("50", Cont_50);

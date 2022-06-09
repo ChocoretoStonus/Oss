@@ -150,7 +150,7 @@ public class Data_System : MonoBehaviour
 
         if (File.Exists(ApplicationPath) && !File.Exists(create))
         {
-            //si existe carpeta pero archivo no, solo creara el json
+            //si existe carpeta pero el archivo no, solo creara el json
             PlayerPrefs.DeleteKey("HighScore");
 
             Json = JsonUtility.ToJson(clase);

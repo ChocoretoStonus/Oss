@@ -8,15 +8,17 @@ using TMPro;
 public class WinController : MonoBehaviour
 {
     #region Variables
-    [SerializeField] TextMeshProUGUI Score_Txt, HighScore_Text;
-    [SerializeField] GameObject Score, HighScore,Back_To_Song,SC;
-    [SerializeField] Image Win_BG;
+    [SerializeField] TextMeshProUGUI Score_Txt, HighScore_Text,_AccText;
+    [SerializeField] TextMeshProUGUI _100Txt, _50Txt, _MissTxt, _300Txt,_MaxCText;
+    [SerializeField] GameObject Score, HighScore,Back_To_Song;
+    [SerializeField] Image Win_BG,RankImg;
     [SerializeField] AudioSource AudioSystem;
     [SerializeField] AudioClip S_M;
-    [SerializeField] Sprite[] SC_HS;
+    [SerializeField] Sprite[] SC_HS_BG;
+    [SerializeField] Sprite[] Ranks;
     [SerializeField] AudioClip[] HS;
-    int GameScore;
-    float GameAccuracy;
+    int GameScore, GameMiss, Game100, Game50, Game300,GameMC;
+    float GameAccuracy,HighAcc;
     #endregion
 
 
@@ -26,8 +28,15 @@ public class WinController : MonoBehaviour
     void Start()
     {
         GameScore = PlayerPrefs.GetInt("GameScore");
-        GameAccuracy = PlayerPrefs.GetInt("Accuracy");
+        GameAccuracy = PlayerPrefs.GetFloat("Accuracy");
+        GameMiss = PlayerPrefs.GetInt("Miss");
+        Game50 = PlayerPrefs.GetInt("50");
+        Game100 = PlayerPrefs.GetInt("100");
+        Game300 = PlayerPrefs.GetInt("300");
+        GameMC = PlayerPrefs.GetInt("ComboMax");
+        HighAcc = PlayerPrefs.GetFloat("HighAcc");
         HS_or_SC();
+        HAcc_or_Acc();
     }
 
 
@@ -49,37 +58,35 @@ public class WinController : MonoBehaviour
         if (PlayerPrefs.GetInt("GameScore") > PlayerPrefs.GetInt("HighScore") || PlayerPrefs.GetInt("HighScore") == 0)
         {
             Probability();
+            Win_BG.sprite = SC_HS_BG[0];
             PlayerPrefs.SetInt("HighScore", GameScore);
             AsigTextScore(GameScore, HighScore_Text);
+            Rank_Calculate();
+            fullAcc();
+            Scores();
             HighScore.SetActive(true);
         }
         //GameScore
         else
         {
-            SC.SetActive(true);
-            Win_BG.sprite = SC_HS[0];
+            Win_BG.sprite = SC_HS_BG[1];
             AsigTextScore(GameScore, Score_Txt);
             AudioSystem.PlayOneShot(S_M);
+            Rank_Calculate();
+            fullAcc();
+            Scores();
             Score.SetActive(true);
         }
     }
 
-
-    void MA_or_GA()
+    void HAcc_or_Acc()
     {
-        //HighScore
-        if (PlayerPrefs.GetInt("Accuracy") > PlayerPrefs.GetInt("MaxAccuracy") || PlayerPrefs.GetInt("MaxAccuracy") == 0)
+        //HighAccuracy
+        if (GameAccuracy > HighAcc)
         {
-            PlayerPrefs.SetInt("MaxAccuracy", GameScore);
+            PlayerPrefs.SetFloat("HighAcc", GameAccuracy);
             //AsigTextScore(GameScore, HighScore_Text);
         }
-        //GameScore
-        else
-        {
-            //Win_BG.sprite = SC_HS[0];
-            //AsigTextScore(GameScore, Score_Txt);
-        }
-        
     }
 
 
@@ -95,7 +102,6 @@ public class WinController : MonoBehaviour
                 //Caminando Vagando
                 
                 //Debug.Log("Vagando");
-                Win_BG.sprite = SC_HS[1];
                 AudioSystem.PlayOneShot(HS[0]);
                 break;
 
@@ -103,14 +109,12 @@ public class WinController : MonoBehaviour
                 //Industry Baby 
 
                 //Debug.Log("Industry");
-                Win_BG.sprite = SC_HS[2];
                 AudioSystem.PlayOneShot(HS[1]);
                 break;
             case 2:
                 //After Dark 
 
                 //Debug.Log("After Dark");
-                Win_BG.sprite = SC_HS[3];
                 AudioSystem.PlayOneShot(HS[2]);
                 break;
         }
@@ -166,6 +170,79 @@ public class WinController : MonoBehaviour
         else if (Score <= 9 && Score > 0)
         {
             TextoScore.text = "0000000" + Score;
+        }
+    }
+
+    void Rank_Calculate()
+    {
+        if (GameAccuracy==100)
+        {
+            RankImg.sprite = Ranks[0];
+        }
+        else if (GameAccuracy >= 97 && GameAccuracy < 100  &&GameMiss==0 && Game50==0 && Game100 <=3)
+        {
+            RankImg.sprite = Ranks[1];
+        }
+        else if (GameAccuracy >= 92 && GameAccuracy < 97 && GameMiss == 0 && Game50 ==0 && Game100 <= 4)
+        {
+            RankImg.sprite = Ranks[2];
+        }
+        else if (GameAccuracy >= 86 && GameAccuracy < 92)
+        {
+            RankImg.sprite = Ranks[3];
+        }
+        else if (GameAccuracy >= 66 && GameAccuracy < 86)
+        {
+            RankImg.sprite = Ranks[4];
+        }
+        else if (GameAccuracy < 66)
+        {
+            Debug.Log(GameAccuracy);
+            RankImg.sprite = Ranks[5];
+        }
+    }
+
+    void Scores()
+    {
+        _100Txt.text = ""+Game100; 
+        _50Txt.text = "" + Game50;
+        _MissTxt.text = "" + GameMiss;
+        _300Txt.text = "" + Game300;
+        _MaxCText.text = GameMC +"x";
+    }
+
+
+    void fullAcc()
+    {
+
+        //aqui obtengo mi accuracy en un valor redondeado para compararla
+        //con el accuracy obtenido del metodo "Accuracy"
+        float Int = Mathf.Round(GameAccuracy);
+
+        float mult = Mathf.Pow(10.0f, 2);
+        float OneDecimal = Mathf.Round(GameAccuracy * mult) / mult;
+
+
+        if (GameAccuracy > 100)
+        {
+            _AccText.text = GameAccuracy + ".00%";
+        }
+        else if (GameAccuracy <= 0)
+        {
+            GameAccuracy = 0;
+            _AccText.text = GameAccuracy + ".00%";
+        }
+        else if (GameAccuracy == Int)
+        {
+            _AccText.text = GameAccuracy + ".00%";
+        }
+        else if (GameAccuracy == OneDecimal)
+        {
+            _AccText.text = GameAccuracy + "0%";
+        }
+        else
+        {
+            _AccText.text = GameAccuracy + "%";
         }
     }
 
