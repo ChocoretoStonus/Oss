@@ -4,6 +4,9 @@ using System.Collections;
 using TMPro;
 public class SwipeMenu : MonoBehaviour
 {
+
+    #region Variables
+
     [SerializeField] AudioSource AudioSystem;
     [SerializeField] AudioClip[] Music;
     //[SerializeField]Scrollbar valueScroll;
@@ -17,29 +20,43 @@ public class SwipeMenu : MonoBehaviour
     [SerializeField] TextMeshProUGUI Name, Artist,MaxAcc,Difficulty;
     [SerializeField] GameObject Exit_Prefab, To_Black;
     private float Acc;
-    void Awake()
-    {
+
+    #endregion
+
+
+    #region Unity Methods
+
+
+    void Awake(){
         nameLimit = -106;
         //StartCoroutine(ScrollArtist(timeScroll, distanceScroll));
         NamePos.localPosition = new Vector2(40.6f, NamePos.localPosition.y);
         StartCoroutine(ScrollName(timeScroll, distanceScroll));
     }
-    private void Start()
-    {
+
+
+    private void Start(){
         StartCoroutine("ChangePosition");
         AudioSystem.Play();
     }
 
-    private void FixedUpdate()
-    {
+
+    private void FixedUpdate(){
         scroll_pos = this.gameObject.transform.position.x;
         //scroll_pos = posi.position.x; 
     }
 
-    void Update()
-    {
+
+    void Update(){
         Music_Selector();
     }
+
+
+    #endregion
+
+
+    #region Own Methods
+
 
     void Music_Selector()
     {
@@ -271,6 +288,10 @@ public class SwipeMenu : MonoBehaviour
     }
 
 
+    #endregion
+
+
+    #region Corrutines
 
     IEnumerator ScrollName(float time, float distanceAum)
     {
@@ -320,7 +341,6 @@ public class SwipeMenu : MonoBehaviour
     }
 
 
-
     IEnumerator ChangePosition()
     {
         while (true)
@@ -331,4 +351,7 @@ public class SwipeMenu : MonoBehaviour
             else if (posiprev > PosIni || posiprev < PosFini) {Change = true;}
         }
     }
+
+    #endregion
+
 }

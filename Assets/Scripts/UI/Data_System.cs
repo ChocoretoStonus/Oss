@@ -1,7 +1,7 @@
-using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.IO;
 
 public class Data_System : MonoBehaviour
 {
@@ -27,6 +27,7 @@ public class Data_System : MonoBehaviour
 
     void FixedUpdate()
     {
+
         //detecta si hay cambios, y si los hay guarda la informacion en el "Json"
         if (cambios)
         {
@@ -139,7 +140,7 @@ public class Data_System : MonoBehaviour
     public void CreateJson()
     {
 
-        //para crear un archivo con la extencion
+        //para crear un archivo con una extencion
         //se necesita de un path y tu archivo con la extension que deseas hacer,
         //en este caso el .json
 
