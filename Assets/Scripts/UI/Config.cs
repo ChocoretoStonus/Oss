@@ -4,12 +4,12 @@ using System.IO;
 using TMPro;
 using SimpleFileBrowser;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class Config : MonoBehaviour
 {
 
     #region Variables
+
     [SerializeField] Image ChangeImg, ProfileImg;
     [SerializeField] Sprite spriteUnknown;
     [SerializeField] GameObject ToBlack;
@@ -25,7 +25,6 @@ public class Config : MonoBehaviour
     Data data;
     int porcentaje;
 
-
     #endregion
 
 
@@ -40,11 +39,9 @@ public class Config : MonoBehaviour
     }
     private void Start()
     {
-        //Descarga los datos guardados al iniciarse y despues los carga esos datos
+        //Descarga los datos guardados al iniciarse y despues carga esos datos
         //en la clase que defini en el "Awake"
-
-        data_System.ApplicationPath = Application.dataPath + "/Jsons/";
-        data_System.Json = File.ReadAllText(data_System.ApplicationPath + "Database.json");
+        Debug.Log(data_System.Json);
         data = JsonUtility.FromJson<Data>(data_System.Json);
         pathImg = data.ProfilePhoto;
         FirstTime = 0;
@@ -54,13 +51,10 @@ public class Config : MonoBehaviour
     private void FixedUpdate()
     {
         //Esta en constante descarga de datos esto con el fin de estar al pendiente
-        //si se llega a guardar algo en el json para en tiempo real cargarlo
+        //de si se llegase a guardar algo en el json se actualice en tiempo real 
         data = JsonUtility.FromJson<Data>(data_System.Json);
     }
 
-    private void Update()
-    {
-    }
 
     #endregion
 
@@ -120,7 +114,6 @@ public class Config : MonoBehaviour
         //Guardado Json
         data.NameTag = ChangeName.text;
         data.ProfilePhoto = pathFileExplorer;
-        //data.Opacity = Darkness.value;
         SaveData();
         this.gameObject.SetActive(false);
         isOn =false;
@@ -160,8 +153,10 @@ public class Config : MonoBehaviour
     {
         pathImg = data.ProfilePhoto;
 
+        //Si el path del archivo es vacio y no es la primera vez
         if (pathFileExplorer == "" && FirstTime == 1)
         {
+            //Si el path del arvchivo esta vacio pero el Username es el mismo
             if (pathFileExplorer == "" && ChangeName.text == UserName.text )
             {
                 ChangeName.text = UserName.text;
@@ -170,12 +165,14 @@ public class Config : MonoBehaviour
                 isOn = false;
                 FileBrowser.HideDialog();
             }
+            //Si el Username es diferente y tiene mas de 3 caracteres
             else if (ChangeName.text != UserName.text && ChangeName.text.Length <= 3)
             {
                 this.gameObject.SetActive(false);
                 FileBrowser.HideDialog();
                 isOn = false;
             }
+            //Si no es ninguna
             else
             {
                 UserName.text = ChangeName.text;
@@ -187,8 +184,10 @@ public class Config : MonoBehaviour
             }
 
         }
+        //Si el path del archivo es vacio y es la primera vez
         else if (pathFileExplorer == "" && FirstTime <= 0)
         {
+            //Si el path del archivo es vacio y el Username es el mismo 
             if (pathFileExplorer == "" && ChangeName.text == UserName.text)
             {
                 FirstTime = 1;
@@ -198,12 +197,14 @@ public class Config : MonoBehaviour
                 isOn = false;
                 FileBrowser.HideDialog();
             }
+            //Si el Username es diferente y es mayor a 3 tres caracteres
             else if (ChangeName.text != UserName.text && ChangeName.text.Length <= 3)
             {
                 this.gameObject.SetActive(false);
                 FileBrowser.HideDialog();
                 isOn = false;
             }
+            //Si no es ninguna
             else
             {
                 FirstTime = 1;
@@ -216,6 +217,7 @@ public class Config : MonoBehaviour
 
             }
         }
+        //Si el path del archivo no es vacio y no es la primera vez
         else if (pathFileExplorer != "" && FirstTime == 1) {
             
             if (pathFileExplorer != "" && ChangeName.text == UserName.text && ChangeName.text.Length >= 3  || pathFileExplorer != "" && ChangeName.text.Length <= 3)
@@ -232,8 +234,10 @@ public class Config : MonoBehaviour
                 SaveProfile();
             }
         }
+        //Si el path del archivo no es vacio y es la primera vez
         else if (pathFileExplorer != "" && FirstTime == 0) {
-            if (pathFileExplorer != "" && ChangeName.text.Length <= 3 || pathFileExplorer != "" && ChangeName.text.Length <= 3)
+            //Si el path del archivo no es vacio y el Username es mayor a tres caracteres
+            if (pathFileExplorer != "" && ChangeName.text.Length <= 3)
             {
                 FirstTime = 1;
                 ProfileImg.sprite = sprite;
@@ -243,7 +247,9 @@ public class Config : MonoBehaviour
                 this.gameObject.SetActive(false);
                 isOn = false;
             }
-            else if (pathFileExplorer != "" && ChangeName.text != UserName.text && ChangeName.text.Length >= 3)
+            //Si el path del archivo no es vacio y el Username es mayor a tres caracteres
+            else if (pathFileExplorer != "" && ChangeName.text != UserName.text 
+                     && ChangeName.text.Length >= 3)
             {
                 FirstTime = 1;
                 SaveProfile();
@@ -262,19 +268,19 @@ public class Config : MonoBehaviour
     }
 
 
-
-    #endregion
-
-
     public void Game()
     {
         ToBlack.SetActive(true);
     }
 
 
-
     #endregion
 
+
+
+
+
+    #endregion
 
 
 }
