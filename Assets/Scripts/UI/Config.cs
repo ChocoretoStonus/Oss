@@ -73,7 +73,6 @@ public class Config : MonoBehaviour
     #region FileExplorer
 
 
-    [ContextMenu("Load Image")]
     public void UploadProfile()
     {
         FileBrowser.SetFilters(true, new FileBrowser.Filter("Images", ".jpg", ".png",".jpeg"), new FileBrowser.Filter("Text Files", ".txt", ".pdf"));
@@ -91,7 +90,7 @@ public class Config : MonoBehaviour
         {
             // Print paths of the selected files (FileBrowser.Result) (null, if FileBrowser.Success is false)
             for (int i = 0; i < FileBrowser.Result.Length; i++)
-            //Debug.Log(FileBrowser.Result[i]);
+
             pathFileExplorer = FileBrowser.Result[i];
             byte[] image = File.ReadAllBytes(pathFileExplorer);
             Texture2D NewTexture = new Texture2D(1, 1);
@@ -112,7 +111,6 @@ public class Config : MonoBehaviour
     #region Sistemas de Carga y Guardado
 
 
-    [ContextMenu("Save data")]
     public void SaveProfile(){
         //carga en el perfil del usuario
         ProfileImg.sprite = sprite;
