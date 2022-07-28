@@ -10,10 +10,10 @@ public class WinController : MonoBehaviour
     #region Variables
     [SerializeField] TextMeshProUGUI Score_Txt, HighScore_Text,_AccText;
     [SerializeField] TextMeshProUGUI _100Txt, _50Txt, _MissTxt, _300Txt,_MaxCText;
-    [SerializeField] GameObject Score, HighScore,Back_To_Song;
+    [SerializeField] GameObject Anim_Score, Anim_HighScore,Back_To_Song;
     [SerializeField] Image Win_BG,RankImg;
     [SerializeField] AudioSource AudioSystem;
-    [SerializeField] AudioClip S_M;
+    [SerializeField] AudioClip ScoreMusic;
     [SerializeField] Sprite[] SC_HS_BG;
     [SerializeField] Sprite[] Ranks;
     [SerializeField] AudioClip[] HS;
@@ -64,18 +64,18 @@ public class WinController : MonoBehaviour
             Rank_Calculate();
             fullAcc();
             Scores();
-            HighScore.SetActive(true);
+            Anim_HighScore.SetActive(true);
         }
         //GameScore
         else
         {
             Win_BG.sprite = SC_HS_BG[1];
             AsigTextScore(GameScore, Score_Txt);
-            AudioSystem.PlayOneShot(S_M);
+            AudioSystem.PlayOneShot(ScoreMusic);
             Rank_Calculate();
             fullAcc();
             Scores();
-            Score.SetActive(true);
+            Anim_Score.SetActive(true);
         }
     }
 

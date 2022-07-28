@@ -2309,7 +2309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73337ea4f9688b14ab3616257a6f1960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config: {fileID: 0}
+  config: {fileID: 1815051719}
   main_bgi: {fileID: 381022839}
   numi_1: 0
   numi_2: 0

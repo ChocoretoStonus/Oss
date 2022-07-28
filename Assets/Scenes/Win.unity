@@ -335,13 +335,13 @@ MonoBehaviour:
   _MissTxt: {fileID: 1816307502}
   _300Txt: {fileID: 1698374600}
   _MaxCText: {fileID: 680622178}
-  Score: {fileID: 1926678477}
-  HighScore: {fileID: 477078266}
+  Anim_Score: {fileID: 1926678477}
+  Anim_HighScore: {fileID: 477078266}
   Back_To_Song: {fileID: 835221578}
   Win_BG: {fileID: 445929992}
   RankImg: {fileID: 803096955}
   AudioSystem: {fileID: 1561953255}
-  S_M: {fileID: 8300000, guid: 7f0d559495b2109458673369e9a8f37d, type: 3}
+  ScoreMusic: {fileID: 8300000, guid: 7f0d559495b2109458673369e9a8f37d, type: 3}
   SC_HS_BG:
   - {fileID: 21300000, guid: 3c31240bcab4658419c3d5b6bd8117af, type: 3}
   - {fileID: 21300000, guid: d86b27086965cf542b73172b4d63950d, type: 3}
@@ -1135,7 +1135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &477078267
 RectTransform:
   m_ObjectHideFlags: 0
