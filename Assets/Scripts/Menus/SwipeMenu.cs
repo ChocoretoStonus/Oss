@@ -28,6 +28,7 @@ public class SwipeMenu : MonoBehaviour
 
 
     void Awake(){
+        
         nameLimit = -106;
         //StartCoroutine(ScrollArtist(timeScroll, distanceScroll));
         NamePos.localPosition = new Vector2(40.6f, NamePos.localPosition.y);
@@ -36,18 +37,21 @@ public class SwipeMenu : MonoBehaviour
 
 
     private void Start(){
+        Application.targetFrameRate = 30;
         StartCoroutine("ChangePosition");
         AudioSystem.Play();
     }
 
 
     private void FixedUpdate(){
+
         scroll_pos = this.gameObject.transform.position.x;
         //scroll_pos = posi.position.x; 
     }
 
 
     void Update(){
+
         Music_Selector();
     }
 
@@ -300,16 +304,11 @@ public class SwipeMenu : MonoBehaviour
         {
         if (NamePos.localPosition.x > nameLimit)
         {
-            //Debug.Log("Hola");
-            //PosiName.x = PosiName.x - distanceAum;
             NamePos.localPosition = new Vector2(NamePos.localPosition.x - distanceAum, NamePos.localPosition.y);
-            //PosiName = new Vector2(PosiName.x - distanceAum, 0);
             }
         if(NamePos.localPosition.x <= nameLimit)
         {
-            //PosiName.x = returnPos;
             NamePos.localPosition = new Vector2(PosBaseName, NamePos.localPosition.y);
-            //PosiName = new Vector2(returnPos, 0);
             }
             yield return new WaitForSeconds(time);
 

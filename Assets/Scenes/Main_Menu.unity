@@ -2021,12 +2021,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: debd5a41501db8441b7cd90470cdf9c8, type: 3}
   - {fileID: 21300000, guid: 7d0134d524a2a094c9bedc26863a0f97, type: 3}
   Degradiente: {r: 1, g: 1, b: 1, a: 1}
-  fa_In: 0
-  fa_Out: 0
+  fade_in: 0
+  fade_out: 0
   paralaxObj: {fileID: 381022835}
   mouseX: 0.58
   mouseY: 0.15
-  perm: 1
+  access: 0
   press: 0
 --- !u!1 &413255568
 GameObject:
@@ -5612,7 +5612,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 381022839}
         m_TargetAssemblyTypeName: Main_BGI, Assembly-CSharp
-        m_MethodName: boton_cam
+        m_MethodName: Botton_Paralax
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

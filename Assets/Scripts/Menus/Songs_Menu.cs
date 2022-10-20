@@ -167,7 +167,7 @@ public class Songs_Menu : MonoBehaviour
     void before_song()
     {
         cam_img = true;
-        main_bgi.fadeout();
+        main_bgi.Fade_Out();
         if (numi_3==0 && primera_vez)
         {
             if (!IsPause)
@@ -205,7 +205,7 @@ public class Songs_Menu : MonoBehaviour
                 if (!IsPause && !AfterToPause || IsPause && !AfterToPause)
                 {
                     cam_img = true;
-                    main_bgi.fadeout();
+                    main_bgi.Fade_Out();
                     son.clip = otherClip[numi_1];
                     son.Play();
                 }
@@ -236,7 +236,7 @@ public class Songs_Menu : MonoBehaviour
             if (!IsPause && !AfterToPause || IsPause && !AfterToPause)
             {
                 cam_img = true;
-                main_bgi.fadeout();
+                main_bgi.Fade_Out();
                 son.clip = otherClip[numi_1];
                 son.Play();
             }

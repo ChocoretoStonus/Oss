@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class Main_BGI : MonoBehaviour
 {
 
+    
     #region Variables
 
     [SerializeField] GameObject ParalaxDis, ParalaxEna;
@@ -14,10 +15,10 @@ public class Main_BGI : MonoBehaviour
     [SerializeField] Image Default_Image;
     [SerializeField] Sprite[] Fondos;
     [SerializeField] Color Degradiente;
-    [HideInInspector] public bool fa_In, fa_Out;
+    [HideInInspector] public bool fade_in, fade_out;
     [SerializeField] GameObject paralaxObj;
     [SerializeField] float mouseX, mouseY;
-    [SerializeField] public bool perm, press;
+    [SerializeField] public bool access, press;
     Data datos;
     #endregion
 
@@ -34,7 +35,7 @@ public class Main_BGI : MonoBehaviour
     void Awake()
     {
         datos = new Data(); 
-        fa_In = false;
+        fade_in = false;
     }
 
     public void Start()
@@ -45,11 +46,11 @@ public class Main_BGI : MonoBehaviour
 
         if (datos.Paralax)
         {
-            perm = true;
+            access = true;
         }
         else if (!datos.Paralax)
         {
-            perm = false;
+            access = false;
         }
 
 
@@ -70,33 +71,33 @@ public class Main_BGI : MonoBehaviour
         {
             datos.Paralax = true;
         }
-        desvanecidos();
+        Fades();
     }
 
 
     #endregion
-
+    
 
 
     #region Metodos Propios
 
-    public void boton_cam()
+    public void Botton_Paralax()
     {
-        if (perm)
+        if (access)
         {
             press = true;
-            perm = false;
+            access = false;
         }
-        else if (!perm)
+        else if (!access)
         {
             press = true;
-            perm = true;
+            access = true;
         }
     }
 
     void cam()
     {
-            if (perm && press)
+            if (access && press)
             {
             ParalaxEna.SetActive(true);
             datos.Paralax = true;
@@ -106,7 +107,7 @@ public class Main_BGI : MonoBehaviour
             data_system.cambios=true;
             press = false;
         }
-            else if (!perm && press)
+            else if (!access && press)
             {
             ParalaxDis.SetActive(true);
             datos.Paralax = false;
@@ -139,11 +140,11 @@ public class Main_BGI : MonoBehaviour
 
 
 
-    public void fadeout()
+    public void Fade_Out()
     {
         Audio_System.cam_img = false;
-        fa_Out = true;
-        fa_In = false;
+        fade_out = true;
+        fade_in = false;
 
         if (Default_Image.color.a >= 0.3f && !Audio_System.cam_img)
         {
@@ -152,109 +153,108 @@ public class Main_BGI : MonoBehaviour
         }
         else
         {
-            fa_Out = false;
-            fa_In = true;
-            compara_img();
+            fade_out = false;
+            fade_in = true;
+            Compare_img();
         }
     }
 
 
 
-    void compara_img()
+    void Compare_img()
     {
         Cancion = Audio_System.son.clip.name;
         switch (Cancion)
         {
             case "bye":
                 Audio_System.cam_img = true;
-                fa_Out = false;
+                fade_out = false;
                 Default_Image.sprite = Fondos[0];
-                fade();
+                Fade_In();
                 break;
 
             case "phony":
                 Audio_System.cam_img = true;
-                fa_Out = false;
+                fade_out = false;
                 Default_Image.sprite = Fondos[1];
-                fade();
+                Fade_In();
                 break;
 
             case "Vigin":
                 Audio_System.cam_img = true;
-                fa_Out = false;
+                fade_out = false;
                 Default_Image.sprite = Fondos[2];
-                fade();
+                Fade_In();
                 break;
 
             case "hero":
                 Audio_System.cam_img = true;
-                fa_Out = false;
+                fade_out = false;
                 Default_Image.sprite = Fondos[3];
-                fade();
+                Fade_In();
                 break;
 
             case "buts":
                 Audio_System.cam_img = true;
-                fa_Out = false;
+                fade_out = false;
                 Default_Image.sprite = Fondos[4];
-                fade();
+                Fade_In();
                 break;
 
             case "giri giri":
                 Audio_System.cam_img = true;
-                fa_Out = false;
+                fade_out = false;
                 Default_Image.sprite = Fondos[5];
-                fade();
+                Fade_In();
                 break;
 
             case "finorza":
                 Audio_System.cam_img = true;
-                fa_Out = false;
+                fade_out = false;
                 Default_Image.sprite = Fondos[6];
-                fade();
+                Fade_In();
                 break;
 
             case "fine":
                 Audio_System.cam_img = true;
-                fa_Out = false;
+                fade_out = false;
                 Default_Image.sprite = Fondos[7];
-                fade();
+                Fade_In();
                 break;
 
             case "eromanga":
                 Audio_System.cam_img = true;
-                fa_Out = false;
+                fade_out = false;
                 Default_Image.sprite = Fondos[8];
-                fade();
+                Fade_In();
                 break;
         }
     }
 
 
 
-    void desvanecidos()
-     
-        {
-            if (fa_In)
+    void Fades()
+    {
+            if (fade_in)
             {
-            compara_img();
+            Compare_img();
             }
 
 
-            if (fa_Out)
+            if (fade_out)
         {
-                fadeout();
+                Fade_Out();
             }
 
         }
 
    
 
-    void fade()
+    void Fade_In()
     {
-        fa_In = true;
+        fade_in = true;
         Audio_System.cam_img = true;
-        fa_Out = false;
+        fade_out = false;
         if (Default_Image.color.a < 1 && Audio_System.cam_img)
         {
             Degradiente.a += Time.deltaTime;
@@ -267,7 +267,5 @@ public class Main_BGI : MonoBehaviour
 
     #endregion
 
-
-
-
+    
 }
